@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Models\Post;
+use App\Models\Comments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\validator;
+use Illuminate\Support\Facades\DB;
 
 
 class PostController extends Controller
@@ -15,24 +17,28 @@ class PostController extends Controller
     $validator = validator::make($request->all(), [
         'title' => 'required',
         'description' => 'required',
-        // 'thumbnail' => 'image|mimetypes:image/jpeg,image/png'
+         'thumbnail' => 'image|mimes:jpeg,png,jpg,svg'
+       
         
     ]);
  
 
     if($validator->fails()){
-        return back()->withErrors($validator);
+         return back()->withErrors($validator);
+      
     }else{
-        // $imageName = time().".".$request->thumbnail->extension();
+       
+        
+         $imageName = time().".".$request->thumbnail->extension();
         // // $request->thumbnail->storeAs('images', $imageName);
-        // $request->thumbnail->move(public_path('uploads'),$imageName);
+         $request->thumbnail->move(public_path('uploads'),$imageName);
         // $imageName = $request->file('thumbnail')->store('public/uploads');
       
         Post::create([
             'user_id' => auth()->user()->id,
             'title' => $request->title,
             'description' => $request->description,
-            // 'thumbnail' => $imageName
+             'thumbnail' => $imageName
            
         ]);
     }
@@ -44,8 +50,10 @@ class PostController extends Controller
    public function show($id) {
 
     $post = Post::findOrfail($id);
+    $Comments = Comments::where('post_id',$post->id)->get();
+   
 
-    return view('posts.show',compact('post'));
+    return view('posts.show',compact('post','Comments'));
    }
 
    public function edit($id) {

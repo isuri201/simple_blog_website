@@ -32,10 +32,10 @@
     <label for="description" class="form-label">Post Desciption</label>
     <textarea class='form-control' name='description'>Enter Post Description Here...</textarea>
   </div>
-  {{-- <div class="mb-3">
+  <div class="mb-3">
     <label for="image" class="form-label">Upload an image</label>
     <input type='file' class='form-control' id='image' name='thumbnail'>
-  </div> --}}
+  </div>
   
   <button type="submit" class="btn btn-primary">Post</button>
 </form>

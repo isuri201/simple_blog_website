@@ -6,7 +6,7 @@
                 
                     <!-- Featured blog post-->
                     <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                        <a href="#!"><img class="card-img-top" src="{{ asset('uploads/blog.jpg')}}" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted">January 1, 2022</div>
                             <h2 class="card-title">Featured Post Title</h2>
@@ -20,7 +20,7 @@
                         <div class="col-lg-6">
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <img class="card-img-top" src="{{asset('uploads/'.$posts->thumbnail)}}" alt="..." />
                                 <div class="card-body">
                                     <div class="small text-muted">{{$posts->user->name}}  {{date('Y-m-d',strtotime($posts->created_at))}}</div>
                                     <h2 class="card-title h4">{{$posts->title}}</h2>
